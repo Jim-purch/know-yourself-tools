@@ -21,20 +21,7 @@ import { useTheme } from './context/ThemeContext'
 import MBTITool from './components/MBTITool'
 import BaziTool from './components/BaziTool'
 import OHCardsTool from './components/OHCardsTool'
-
-// Placeholder for Zi Wei Tool
-const ZiWeiTool = () => (
-    <div className="p-8 max-w-2xl mx-auto h-full flex flex-col justify-center text-center">
-        <div className="w-20 h-20 bg-[var(--accent-rose-soft)] text-[var(--accent-rose)] rounded-full flex items-center justify-center mx-auto mb-6">
-            <Star size={40} />
-        </div>
-        <h2 className="text-3xl font-bold mb-4 text-[var(--text-main)]">紫微斗数</h2>
-        <p className="text-[var(--text-muted)] mb-8">精准的人生星盘分析。该模块正在研发中，敬请期待。</p>
-        <div className="bg-[var(--bg-card)] p-6 rounded-xl border border-[var(--border-color)]">
-            <p className="text-[var(--text-muted)]">紫微排盘涉及复杂的星曜布局，我们将为您提供最专业的推演算法。</p>
-        </div>
-    </div>
-)
+import ZiWeiTool from './components/ZiWeiTool'
 
 const ThemeSwitcher = () => {
     const { theme, setTheme } = useTheme();

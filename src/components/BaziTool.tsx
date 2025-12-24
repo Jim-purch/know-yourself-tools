@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Solar, Lunar } from 'lunar-javascript'
+import { SolarTime } from 'tyme4ts'
 import { motion } from 'framer-motion'
 import { Calendar as CalendarIcon, Clock, Sparkles } from 'lucide-react'
 
@@ -13,15 +13,15 @@ export default function BaziTool({ onFinish }: { onFinish: (result: any) => void
         const [year, month, day] = birthDate.split('-').map(Number)
         const [hour, minute] = birthTime.split(':').map(Number)
 
-        const solar = Solar.fromYmdHms(year, month, day, hour, minute, 0)
-        const lunar = solar.getLunar()
-        const eightChar = lunar.getEightChar()
+        // Tyme4ts SolarTime
+        const solarTime = SolarTime.fromYmdHms(year, month, day, hour, minute, 0)
+        const eightChar = solarTime.getSixtyCycleHour().getEightChar()
 
         const data = {
-            year: { stem: eightChar.getYearGan(), branch: eightChar.getYearZhi() },
-            month: { stem: eightChar.getMonthGan(), branch: eightChar.getMonthZhi() },
-            day: { stem: eightChar.getDayGan(), branch: eightChar.getDayZhi() },
-            hour: { stem: eightChar.getHourGan(), branch: eightChar.getHourZhi() }
+            year: { stem: eightChar.getYear().getHeavenStem().getName(), branch: eightChar.getYear().getEarthBranch().getName() },
+            month: { stem: eightChar.getMonth().getHeavenStem().getName(), branch: eightChar.getMonth().getEarthBranch().getName() },
+            day: { stem: eightChar.getDay().getHeavenStem().getName(), branch: eightChar.getDay().getEarthBranch().getName() },
+            hour: { stem: eightChar.getHour().getHeavenStem().getName(), branch: eightChar.getHour().getEarthBranch().getName() }
         }
 
         setResult(data)

@@ -10,3 +10,8 @@
 4:19:56 PM [vite] (client) hmr update /src/index.css
 4:19:56 PM [vite] (client) hmr update /src/index.css
 4:20:29 PM [vite] (client) hmr update /src/App.tsx
+4:30:17 PM [vite] (client) hmr update /src/components/BaziTool.tsx
+4:31:24 PM [vite] (client) hmr update /src/App.tsx
+4:31:58 PM [vite] (client) ✨ new dependencies optimized: tyme4ts, iztro
+4:31:58 PM [vite] (client) ✨ optimized dependencies changed. reloading
+4:36:47 PM [vite] (client) hmr update /src/components/ZiWeiTool.tsx
