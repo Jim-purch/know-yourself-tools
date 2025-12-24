@@ -1,0 +1,3 @@
+[submodule "OH-MindMirror"]
+	path = OH-MindMirror
+	url = git@github.com:Jim-purch/OH-MindMirror.git
