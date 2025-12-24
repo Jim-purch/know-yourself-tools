@@ -54,6 +54,7 @@ const ThemeSwitcher = () => {
 }
 
 export default function App() {
+    const { theme } = useTheme();
     const [activeTool, setActiveTool] = useState<string | null>(null)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [history, setHistory] = useState<any[]>(() => {
@@ -235,6 +236,16 @@ export default function App() {
 
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto relative p-4 md:p-0">
+                {/* Tech Theme Decorative Overlay */}
+                {theme === 'tech' && (
+                    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+                        <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-[var(--primary)] opacity-50"></div>
+                        <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-[var(--primary)] opacity-50"></div>
+                        <div className="absolute top-0 right-0 w-8 h-8 border-r border-t border-[var(--primary)] opacity-30"></div>
+                        <div className="absolute bottom-0 left-0 w-8 h-8 border-l border-b border-[var(--primary)] opacity-30"></div>
+                    </div>
+                )}
+
                 <AnimatePresence mode="wait">
                     {!activeTool ? (
                         <motion.div
