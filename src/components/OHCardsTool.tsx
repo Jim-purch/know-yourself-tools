@@ -49,11 +49,11 @@ export default function OHCardsTool({ onFinish }: { onFinish: (result: any) => v
     return (
         <div className="p-8 max-w-4xl mx-auto h-full flex flex-col items-center justify-center">
             <header className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-2">OH 卡探索</h2>
-                <p className="text-slate-400">点击按钮，开启潜意识的图景对话。</p>
+                <h2 className="text-3xl font-bold mb-2 text-[var(--text-main)]">OH 卡探索</h2>
+                <p className="text-[var(--text-muted)]">点击按钮，开启潜意识的图景对话。</p>
             </header>
 
-            <div className="relative w-full min-h-[400px] glass mb-12 flex items-center justify-center p-8">
+            <div className="relative w-full min-h-[400px] glass mb-12 flex items-center justify-center p-8 bg-[var(--glass-bg)] border border-[var(--glass-border)]">
                 <AnimatePresence mode="wait">
                     {!drawnCards && !isDrawing && (
                         <motion.div
@@ -61,10 +61,10 @@ export default function OHCardsTool({ onFinish }: { onFinish: (result: any) => v
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                             className="text-center"
                         >
-                            <div className="w-24 h-32 border-2 border-dashed border-slate-700 rounded-xl mb-6 mx-auto flex items-center justify-center text-slate-700">
+                            <div className="w-24 h-32 border-2 border-dashed border-[var(--text-muted)] rounded-xl mb-6 mx-auto flex items-center justify-center text-[var(--text-muted)]">
                                 <Layout size={40} />
                             </div>
-                            <p className="text-slate-500 italic">准备好后点击下方按钮</p>
+                            <p className="text-[var(--text-muted)] italic">准备好后点击下方按钮</p>
                         </motion.div>
                     )}
 
@@ -88,7 +88,7 @@ export default function OHCardsTool({ onFinish }: { onFinish: (result: any) => v
                         >
                             <div className="relative group">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                                <div className="relative w-48 h-64 bg-slate-900 rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+                                <div className="relative w-48 h-64 bg-[var(--bg-main)] rounded-xl overflow-hidden border border-[var(--border-color)] shadow-2xl">
                                     <img
                                         src={`/cards/image-card/${drawnCards.image}.jpg`}
                                         alt="Image Card"
@@ -119,7 +119,7 @@ export default function OHCardsTool({ onFinish }: { onFinish: (result: any) => v
                     <button
                         onClick={draw}
                         disabled={isDrawing}
-                        className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold shadow-lg shadow-indigo-500/20 flex items-center gap-2 transition-all disabled:opacity-50"
+                        className="px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white rounded-xl font-bold shadow-lg shadow-indigo-500/20 flex items-center gap-2 transition-all disabled:opacity-50"
                     >
                         <Sparkles size={20} /> 抽取的瞬间
                     </button>
@@ -127,7 +127,7 @@ export default function OHCardsTool({ onFinish }: { onFinish: (result: any) => v
                     <button
                         onClick={draw}
                         disabled={isDrawing}
-                        className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold border border-slate-700 flex items-center gap-2 transition-all"
+                        className="px-8 py-4 bg-[var(--bg-card)] hover:bg-[var(--glass-bg)] text-[var(--text-main)] rounded-xl font-bold border border-[var(--border-color)] flex items-center gap-2 transition-all"
                     >
                         <RefreshCcw size={20} /> 重新抽取
                     </button>
@@ -135,7 +135,7 @@ export default function OHCardsTool({ onFinish }: { onFinish: (result: any) => v
             </div>
 
             {drawnCards && (
-                <p className="mt-8 text-slate-500 text-sm max-w-md text-center">
+                <p className="mt-8 text-[var(--text-muted)] text-sm max-w-md text-center">
                     凝视这两张卡片，放松呼吸。尝试将图片表现的画面与核心关键词联系在一起。
                 </p>
             )}

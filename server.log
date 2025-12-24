@@ -1,0 +1,19 @@
+
+> know-yourself-tools@0.0.0 dev
+> vite
+
+
+  VITE v6.4.1  ready in 395 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+4:19:56 PM [vite] (client) hmr update /src/index.css
+4:19:56 PM [vite] (client) hmr update /src/index.css
+4:20:29 PM [vite] (client) hmr update /src/App.tsx
+4:30:17 PM [vite] (client) hmr update /src/components/BaziTool.tsx
+4:31:24 PM [vite] (client) hmr update /src/App.tsx
+4:31:58 PM [vite] (client) ✨ new dependencies optimized: tyme4ts, iztro
+4:31:58 PM [vite] (client) ✨ optimized dependencies changed. reloading
+4:36:47 PM [vite] (client) hmr update /src/components/ZiWeiTool.tsx
+4:46:35 PM [vite] (client) hmr update /src/index.css
+4:47:17 PM [vite] (client) hmr update /src/App.tsx
