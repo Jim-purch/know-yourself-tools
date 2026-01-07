@@ -184,6 +184,7 @@ body:not([data-theme='light']):not([data-theme='tech']) {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+    filter: drop-shadow(0 0 5px rgba(0, 255, 157, 0.3));
 }
 
 button {
@@ -191,6 +192,25 @@ button {
     border: none;
     outline: none;
     transition: all 0.2s ease;
+}
+
+/* Custom Input Date Picker Styling */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+[data-theme='light'] input[type="date"]::-webkit-calendar-picker-indicator,
+[data-theme='light'] input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: none;
 }
 
 ::-webkit-scrollbar {

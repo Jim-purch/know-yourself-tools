@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, CheckCircle2, RotateCcw } from 'lucide-react'
+import { Button } from './ui/Button'
+import { Card } from './ui/Card'
 
 const questions = [
     { id: 1, text: '在社交聚会中，你通常：', options: [{ text: '与多人交谈，包括陌生人', type: 'E' }, { text: '只与少数熟识的人交谈', type: 'I' }] },
@@ -56,30 +58,31 @@ export default function MBTITool({ onFinish }: { onFinish: (result: string) => v
         ].join('')
 
         return (
-            <div className="p-8 max-w-2xl mx-auto text-center">
+            <div className="p-4 md:p-8 max-w-2xl mx-auto text-center">
                 <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-                    <div className="w-20 h-20 bg-[var(--primary)]/20 text-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-20 h-20 bg-[var(--primary)]/20 text-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[var(--primary)]/20">
                         <CheckCircle2 size={40} />
                     </div>
                     <h2 className="text-3xl font-bold mb-2 text-[var(--text-main)]">您的性格类型是：{finalResult}</h2>
                     <p className="text-[var(--text-muted)] mb-8">这是一个初步的探索，MBTI 只是了解自我的一个窗口。</p>
 
-                    <div className="bg-[var(--bg-card)] p-6 rounded-xl border border-[var(--border-color)] mb-8 text-left">
+                    <Card variant="glass" className="mb-8 text-left">
                         <h3 className="font-bold mb-4 flex items-center gap-2 text-[var(--text-main)]">
-                            <span className="w-2 h-2 bg-[var(--primary)] rounded-full"></span>
+                            <span className="w-2 h-2 bg-[var(--primary)] rounded-full shadow-[0_0_10px_var(--primary)]"></span>
                             结果解读
                         </h3>
                         <p className="text-[var(--text-muted)] leading-relaxed">
                             您的测试结果显示您在各个维度上的偏好。这个结果已经保存到您的历史记录中，您可以随时导出。
                         </p>
-                    </div>
+                    </Card>
 
-                    <button
+                    <Button
                         onClick={() => { setShowResult(false); setCurrentIdx(0); setAnswers({}); }}
-                        className="flex items-center gap-2 px-6 py-3 bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white rounded-xl mx-auto transition-all"
+                        variant="primary"
+                        size="lg"
                     >
-                        <RotateCcw size={18} /> 重新测试
-                    </button>
+                        <RotateCcw size={18} className="mr-2" /> 重新测试
+                    </Button>
                 </motion.div>
             </div>
         )
@@ -88,7 +91,7 @@ export default function MBTITool({ onFinish }: { onFinish: (result: string) => v
     const progress = ((currentIdx + 1) / questions.length) * 100
 
     return (
-        <div className="p-8 max-w-2xl mx-auto h-full flex flex-col justify-center">
+        <div className="p-4 md:p-8 max-w-2xl mx-auto h-full flex flex-col justify-center">
             <div className="mb-12">
                 <div className="flex justify-between items-end mb-4">
                     <span className="text-[var(--text-muted)] font-medium">问题 {currentIdx + 1} / {questions.length}</span>
@@ -98,7 +101,7 @@ export default function MBTITool({ onFinish }: { onFinish: (result: string) => v
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${progress}%` }}
-                        className="h-full bg-[var(--primary)]"
+                        className="h-full bg-[var(--primary)] shadow-[0_0_10px_var(--primary)]"
                     />
                 </div>
             </div>
@@ -114,31 +117,34 @@ export default function MBTITool({ onFinish }: { onFinish: (result: string) => v
                     <h2 className="text-2xl font-bold mb-8 leading-tight text-[var(--text-main)]">{questions[currentIdx].text}</h2>
                     <div className="flex flex-col gap-4">
                         {questions[currentIdx].options.map((opt, i) => (
-                            <button
+                            <Card
                                 key={i}
+                                hoverEffect
                                 onClick={() => handleSelect(opt.type)}
-                                className="w-full text-left p-6 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:bg-[var(--glass-bg)] hover:border-[var(--primary)] hover:scale-[1.01] transition-all group"
+                                className="w-full text-left p-6 cursor-pointer group hover:bg-[var(--glass-bg)] hover:border-[var(--primary)]"
+                                variant="default"
                             >
                                 <div className="flex items-center justify-between">
-                                    <span className="text-lg text-[var(--text-main)] group-hover:text-[var(--primary)]">{opt.text}</span>
-                                    <div className="w-6 h-6 rounded-full border border-[var(--text-muted)] group-hover:border-[var(--primary)] flex items-center justify-center">
-                                        <div className="w-3 h-3 bg-[var(--primary)] rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    <span className="text-lg text-[var(--text-main)] group-hover:text-[var(--primary)] transition-colors">{opt.text}</span>
+                                    <div className="w-6 h-6 rounded-full border border-[var(--text-muted)] group-hover:border-[var(--primary)] flex items-center justify-center transition-colors">
+                                        <div className="w-3 h-3 bg-[var(--primary)] rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[0_0_5px_var(--primary)]" />
                                     </div>
                                 </div>
-                            </button>
+                            </Card>
                         ))}
                     </div>
                 </motion.div>
             </AnimatePresence>
 
             <div className="mt-auto pt-8 border-t border-[var(--border-color)] flex justify-between">
-                <button
+                <Button
+                    variant="ghost"
                     disabled={currentIdx === 0}
                     onClick={() => setCurrentIdx(currentIdx - 1)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${currentIdx === 0 ? 'text-[var(--text-muted)] opacity-50 cursor-not-allowed' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]'}`}
+                    className={currentIdx === 0 ? "opacity-0" : ""}
                 >
-                    <ChevronLeft size={20} /> 上一题
-                </button>
+                    <ChevronLeft size={20} className="mr-1" /> 上一题
+                </Button>
             </div>
         </div>
     )

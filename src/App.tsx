@@ -149,7 +149,7 @@ export default function App() {
             <div className="md:hidden flex items-center justify-between p-4 glass sticky top-0 z-50">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center shadow-lg">
-                        <Users className="text-white" size={18} />
+                        <Users className="text-[var(--bg-main)]" size={18} />
                     </div>
                     <span className="font-bold">知己工具箱</span>
                 </div>
@@ -161,13 +161,13 @@ export default function App() {
             {/* Sidebar */}
             <aside className={`
                 fixed md:static inset-0 z-40 bg-[var(--bg-sidebar)] backdrop-blur-xl md:backdrop-blur-none
-                w-full md:w-64 border-r border-[var(--border-color)] p-6 flex flex-col gap-8
+                w-full md:w-64 border-r border-[var(--border-color)] p-6 pt-24 md:p-6 flex flex-col gap-8
                 transform transition-transform duration-300 md:transform-none
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
                 <div className="hidden md:flex items-center gap-3 px-2">
-                    <div className="w-10 h-10 rounded-xl bg-[var(--primary)] flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                        <Users className="text-white" size={24} />
+                    <div className="w-10 h-10 rounded-xl bg-[var(--primary)] flex items-center justify-center shadow-lg shadow-[var(--primary)]/20">
+                        <Users className="text-[var(--bg-main)]" size={24} />
                     </div>
                     <div>
                         <h1 className="font-bold text-lg leading-tight text-[var(--text-main)]">知己工具箱</h1>
@@ -183,10 +183,10 @@ export default function App() {
                 <nav className="flex flex-col gap-2">
                     <button
                         onClick={() => { setActiveTool(null); setIsMobileMenuOpen(false); }}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${!activeTool ? 'bg-[var(--bg-card)] text-[var(--text-main)] shadow-sm border border-[var(--border-color)]' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--glass-bg)]'}`}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all border ${!activeTool ? 'bg-[var(--bg-card)] text-[var(--primary)] shadow-sm border-[var(--primary)] font-semibold' : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--glass-bg)]'}`}
                     >
                         <LayoutDashboard size={20} />
-                        <span className="font-medium">主控制台</span>
+                        <span className="">主控制台</span>
                     </button>
 
                     <div className="mt-6 mb-2 px-4 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-tighter">探索工具</div>
@@ -194,12 +194,12 @@ export default function App() {
                         <button
                             key={tool.id}
                             onClick={() => { setActiveTool(tool.id); setIsMobileMenuOpen(false); }}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTool === tool.id ? 'bg-[var(--bg-card)] text-[var(--text-main)] shadow-sm border border-[var(--border-color)]' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--glass-bg)]'}`}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all border ${activeTool === tool.id ? 'bg-[var(--bg-card)] text-[var(--text-main)] shadow-sm border-[var(--border-color)] font-semibold' : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--glass-bg)]'}`}
                         >
-                            <div className="p-1.5 rounded-md" style={{ backgroundColor: tool.bgVar, color: tool.colorVar }}>
+                            <div className={`p-1.5 rounded-md transition-all ${activeTool === tool.id ? 'shadow-[0_0_8px_var(--primary-soft)]' : ''}`} style={{ backgroundColor: tool.bgVar, color: tool.colorVar }}>
                                 {tool.icon}
                             </div>
-                            <span className="font-medium">{tool.name}</span>
+                            <span className="">{tool.name}</span>
                         </button>
                     ))}
                 </nav>
@@ -214,7 +214,7 @@ export default function App() {
                             <p className="px-4 text-xs text-[var(--text-muted)] italic">暂无记录</p>
                         ) : (
                             history.slice(0, 10).map((item) => (
-                                <div key={item.id} className="p-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg">
+                                <div key={item.id} className="p-3 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg hover:border-[var(--primary)] transition-colors cursor-default">
                                     <div className="text-xs font-bold text-[var(--text-main)]">{item.toolName}</div>
                                     <div className="text-[10px] text-[var(--text-muted)]">{item.timestamp}</div>
                                 </div>
@@ -226,7 +226,7 @@ export default function App() {
                 <div className="mt-auto">
                     <button
                         onClick={exportData}
-                        className="flex items-center gap-3 px-4 py-3 w-full text-[var(--primary)] hover:text-[var(--primary-hover)] hover:bg-[var(--primary)]/10 rounded-lg transition-all"
+                        className="flex items-center gap-3 px-4 py-3 w-full text-[var(--primary)] hover:text-[var(--primary-hover)] hover:bg-[var(--primary)]/10 rounded-lg transition-all border border-transparent hover:border-[var(--primary)]/30"
                     >
                         <Download size={20} />
                         <span className="font-medium">导出所有数据</span>
