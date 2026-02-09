@@ -9,6 +9,7 @@ import {
     ChevronRight,
     LayoutDashboard,
     BrainCircuit,
+    Bot,
     Sun,
     Moon,
     Cpu,
@@ -22,6 +23,7 @@ import MBTITool from './components/MBTITool'
 import BaziTool from './components/BaziTool'
 import OHCardsTool from './components/OHCardsTool'
 import ZiWeiTool from './components/ZiWeiTool'
+import AICoachingTool from './components/AICoachingTool'
 
 const ThemeSwitcher = () => {
     const { theme, setTheme } = useTheme();
@@ -34,13 +36,6 @@ const ThemeSwitcher = () => {
                 title="Light Mode"
             >
                 <Sun size={16} />
-            </button>
-            <button
-                onClick={() => setTheme('dark')}
-                className={`p-2 rounded-md transition-all ${theme === 'dark' ? 'bg-[var(--primary)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'}`}
-                title="Dark Mode"
-            >
-                <Moon size={16} />
             </button>
             <button
                 onClick={() => setTheme('tech')}
@@ -90,6 +85,15 @@ export default function App() {
     }
 
     const tools = [
+        {
+            id: 'ai-coach',
+            name: 'AI 教练',
+            description: '基于 AI 的专业生活教练，通过对话以此厘清思路',
+            icon: <Bot size={24} />,
+            colorVar: 'var(--accent-blue)',
+            bgVar: 'var(--accent-blue-soft)',
+            component: <AICoachingTool />
+        },
         {
             id: 'mbti',
             name: 'MBTI 性格测试',
@@ -235,7 +239,7 @@ export default function App() {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 overflow-y-auto relative p-4 md:p-0">
+            <main className="flex-1 overflow-y-auto relative p-4 md:p-0 flex flex-col">
                 {/* Tech Theme Decorative Overlay */}
                 {theme === 'tech' && (
                     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -294,10 +298,10 @@ export default function App() {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            className="h-full bg-[var(--bg-card)]/50 rounded-xl m-0 md:m-6 overflow-hidden border border-[var(--border-color)]"
+                            className="h-full bg-[var(--bg-card)]/50 rounded-xl m-0 md:m-6 overflow-hidden border border-[var(--border-color)] flex flex-col"
                         >
                              {/* Breadcrumb / Back Button for better UX */}
-                            <div className="p-4 border-b border-[var(--border-color)] flex items-center gap-2">
+                            <div className="p-4 border-b border-[var(--border-color)] flex items-center gap-2 flex-none">
                                 <button onClick={() => setActiveTool(null)} className="text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1 text-sm">
                                     <LayoutDashboard size={16}/> 控制台
                                 </button>
@@ -306,7 +310,7 @@ export default function App() {
                                     {tools.find(t => t.id === activeTool)?.name}
                                 </span>
                             </div>
-                            <div className="h-[calc(100%-60px)] overflow-y-auto">
+                            <div className="flex-1 overflow-y-auto">
                                 {tools.find(t => t.id === activeTool)?.component}
                             </div>
                         </motion.div>
