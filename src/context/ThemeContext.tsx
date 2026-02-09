@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'light' | 'tech';
+type Theme = 'light' | 'tech';
 
 interface ThemeContextType {
     theme: Theme;
@@ -12,17 +12,19 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [theme, setTheme] = useState<Theme>(() => {
         const saved = localStorage.getItem('ky-theme');
-        return (saved as Theme) || 'dark';
+        // Default to 'light' if 'dark' or invalid is found, or allow 'tech' if saved
+        return (saved === 'tech') ? 'tech' : 'light';
     });
 
     useEffect(() => {
         const root = document.documentElement;
-        // Remove existing theme attributes if any (though we overwrite)
 
-        if (theme === 'dark') {
-            root.removeAttribute('data-theme');
+        // Ensure only 'light' or 'tech' is applied
+        if (theme === 'tech') {
+            root.setAttribute('data-theme', 'tech');
         } else {
-            root.setAttribute('data-theme', theme);
+            root.removeAttribute('data-theme'); // default to light (no data-theme usually implies light in many setups, or explicitly set light)
+            root.setAttribute('data-theme', 'light');
         }
 
         localStorage.setItem('ky-theme', theme);
